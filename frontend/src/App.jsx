@@ -1,15 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
 import Inicio from "./pages/Inicio/Inicio";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Inicio />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </BrowserRouter>
+    </AnimatePresence>
   );
 }
 
