@@ -1,0 +1,28 @@
+.body-login{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor_login{
+    display: flex;
+    height: 87vh;
+}
+
+.formulario_login{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen_login{
+    flex: 1;
+    display: flex;
+}
+
+.imagen_login img{
+    width : 100%;
+    height: auto;
+    border-radius: 30px;
+}

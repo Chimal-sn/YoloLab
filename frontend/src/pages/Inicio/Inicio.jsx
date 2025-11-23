@@ -18,7 +18,9 @@ function Inicio() {
     <PageTransition>
       <>
         <div className="header">
-          <h2>YoloLab</h2>
+          
+          <Boton to="/" tipo="logo">YoloLab</Boton>
+          
 
           <div className="sesion">
             <Boton to="/login" tipo = "sin_fondo">Iniciar Sesión</Boton>

@@ -10,13 +10,7 @@
   justify-content: space-between;
 }
 
-.header h2{
-  font-size: 1.9rem ;
-  font-weight: 400;
-}
-
 .sesion{
-  
   display: flex;
   align-items: center;
   gap: 12px;
@@ -24,19 +18,30 @@
 
 .contenedor-inicio {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: 85vh;
 }
 
 .titulo{
+  flex: 1;
+  display: flex;
+  align-items: center;
   font-size: 5rem;
   font-weight: 400;
   color: #111827;
 }
 
+.imagen-inicio{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .contenedor-inicio img{
-  width: 40%;
+  width: 100%;
   height: auto;
+
 }
 
 
