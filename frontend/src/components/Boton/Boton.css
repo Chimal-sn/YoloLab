@@ -1,0 +1,21 @@
+.primario{
+    background-color: #3A7AFE;
+    color: white;
+    
+    
+}
+
+.sin_fondo{
+    background-color: transparent;
+    color: #3A7AFE;
+}
+
+button{
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-family: "Manrope", sans-serif;
+}

@@ -1,12 +1,48 @@
+.body-inicio {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
 
 .header{
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header h2{
-  font-size: 1.7rem ;
+  font-size: 1.9rem ;
   font-weight: 400;
 }
+
+.sesion{
+  
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contenedor-inicio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo{
+  font-size: 5rem;
+  font-weight: 400;
+  color: #111827;
+}
+
+.contenedor-inicio img{
+  width: 40%;
+  height: auto;
+}
+
+
+
+
+
 
 
 
