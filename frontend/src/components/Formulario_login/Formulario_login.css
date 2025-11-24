@@ -1,0 +1,13 @@
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+
+
+.error-login {
+  color: red;
+  font-size: 0.9rem;
+}

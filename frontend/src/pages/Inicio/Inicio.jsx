@@ -18,14 +18,14 @@ function Inicio() {
     <PageTransition>
       <>
         <div className="header">
-          
+
           <Boton to="/" tipo="logo">YoloLab</Boton>
-          
 
           <div className="sesion">
             <Boton to="/login" tipo = "sin_fondo">Iniciar Sesión</Boton>
             <Boton>Registrarse</Boton>
           </div>
+          
         </div>
 
         <div className="contenedor-inicio">
