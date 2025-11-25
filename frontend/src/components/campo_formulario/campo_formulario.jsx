@@ -9,7 +9,8 @@ function InputField({
   onChange,
   required = false,
   minLength,
-  maxLength
+  maxLength,
+  SoloCaracteres = false,
 }) {
 
   const [error, setError] = useState("");
@@ -26,6 +27,11 @@ function InputField({
     if (maxLength && value.length > maxLength) {
       return `Debe tener máximo ${maxLength} caracteres`;
     }
+
+    if (SoloCaracteres && /[^a-zA-Z]/.test(value)) {
+      return "Solo se permiten caracteres alfabéticos";
+    }
+
 
     return ""; // No hay error
   };

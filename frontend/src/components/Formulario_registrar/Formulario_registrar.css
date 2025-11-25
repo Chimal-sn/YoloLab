@@ -1,0 +1,11 @@
+.form-registrar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.error-registrar{
+    color: red;
+    font-size: 0.9rem;
+}

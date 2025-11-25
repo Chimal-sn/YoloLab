@@ -32,6 +32,7 @@ function FormLogin({ onSubmit, loading, error }) {
         value={password}
         onChange={setPassword}
         required={true}
+        
       />
 
       {error && <p className="error-login">{error}</p>}

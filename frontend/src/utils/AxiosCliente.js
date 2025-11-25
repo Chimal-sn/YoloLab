@@ -22,12 +22,10 @@ axiosClient.interceptors.request.use((config) => {
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Si el servidor responde con error
     if (error.response) {
       return Promise.reject(error.response);
     }
 
-    // Si el servidor no responde
     return Promise.reject({
       status: 500,
       data: { error: "Error de conexión con el servidor" },

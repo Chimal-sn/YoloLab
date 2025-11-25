@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loginRequest } from "../services/authService";
-
+import { registrarRequest } from "../services/authService";
 
 export function useAuth(){
     const [loading , setLoading] = useState(false);
@@ -29,8 +29,28 @@ export function useAuth(){
         }
     };
 
+    const registrar = async (userData) => {
+        setLoading (true);
+        setError("");
+
+        try{
+            const data = await registrarRequest (userData);
+            if (data.token){
+                localStorage.setItem("token", data.token);
+            }
+
+            return { success: true, data};
+        }catch (err){
+            setError(err.data?.error ||"Error en el servidor");
+            return { success: false};
+        } finally {
+            setLoading (false);
+        }
+    };
+
     return {
         login,
+        registrar,
         loading,
         error,
     };

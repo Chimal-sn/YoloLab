@@ -1,10 +1,10 @@
-.body-login{
+.body-auth{
     padding: 30px;
     display: flex;
     flex-direction: column;
 }
 
-.contenedor_login{
+.contenedor_auth{
     display: flex;
     height: 87vh;
 }
@@ -13,22 +13,18 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;   
 }
-
-
 
 .formulario{
     width: 70%;
 }
 
-.imagen_login{
+.imagen_auth{
     flex: 1;
     display: flex;
 }
-
-.imagen_login img{
+.imagen_auth img{
     width : 100%;
     height: auto;
     border-radius: 30px;

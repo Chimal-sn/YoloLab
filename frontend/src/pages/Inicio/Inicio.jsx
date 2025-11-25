@@ -23,7 +23,7 @@ function Inicio() {
 
           <div className="sesion">
             <Boton to="/login" tipo = "sin_fondo">Iniciar Sesión</Boton>
-            <Boton>Registrarse</Boton>
+            <Boton to= "/registrar">Registrarse</Boton>
           </div>
           
         </div>
