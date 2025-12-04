@@ -3,10 +3,12 @@ from .serializer import UsuarioSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Usuario
 from rest_framework_simplejwt.tokens import RefreshToken
 
+
+#Funcion que registra un nuevo usuario
 class RegistrarUsuarioView(APIView):
     permission_classes = [AllowAny]
     
@@ -20,6 +22,7 @@ class RegistrarUsuarioView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#Funcion que inicia sesion
 class IniciarSesionView(APIView):
     permission_classes = [AllowAny]
     
@@ -30,7 +33,6 @@ class IniciarSesionView(APIView):
         try:
             usuario = Usuario.objects.get(correo=correo)
         except Usuario.DoesNotExist:
-            print("Correo no registrado:", correo)
             return Response({'error': 'Correo no registrado'}, status=status.HTTP_404_NOT_FOUND)
         
         if not usuario.check_password(password):
@@ -40,7 +42,18 @@ class IniciarSesionView(APIView):
         
         refresh['correo'] = usuario.correo
         
+        usuarioSerializado = UsuarioSerializer(usuario)
+        
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
+            'usuario': usuarioSerializado.data
         }, status=status.HTTP_200_OK)
+
+#Funcion que recupera la informacion del usuario
+class ObtenerUsuarioView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        usuario = request.user
+        usuarioSerializado = UsuarioSerializer(usuario)
+        return Response(usuarioSerializado.data)
