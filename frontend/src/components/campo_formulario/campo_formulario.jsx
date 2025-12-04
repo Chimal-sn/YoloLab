@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 import "./campo_formulario.css";
 
-function InputField({
+const InputField = forwardRef(({
   label,
   type = "text",
   placeholder,
@@ -11,35 +11,43 @@ function InputField({
   minLength,
   maxLength,
   SoloCaracteres = false,
-}) {
+}, ref) => {
 
   const [error, setError] = useState("");
 
-  const validate = (value) => {
-    if (required && value.trim() === "") {
+  const validate = (valueToCheck = value) => {
+    if (required && valueToCheck.trim() === "") {
       return "Este campo es obligatorio";
     }
 
-    if (minLength && value.length < minLength) {
+    if (minLength && valueToCheck.length < minLength) {
       return `Debe tener al menos ${minLength} caracteres`;
     }
 
-    if (maxLength && value.length > maxLength) {
+    if (maxLength && valueToCheck.length > maxLength) {
       return `Debe tener máximo ${maxLength} caracteres`;
     }
 
-    if (SoloCaracteres && /[^a-zA-Z]/.test(value)) {
+    if (SoloCaracteres && /[^a-zA-Z]/.test(valueToCheck)) {
       return "Solo se permiten caracteres alfabéticos";
     }
 
-
-    return ""; // No hay error
+    return ""; // Sin errores
   };
 
+  // Exponemos validate() para el formulario padre
+  useImperativeHandle(ref, () => ({
+    validate: () => {
+      const err = validate();
+      setError(err);
+      return err;
+    }
+  }));
+
   const handleChange = (newValue) => {
-    onChange(newValue);             // actualiza el valor en el padre
-    const errorMsg = validate(newValue); // valida
-    setError(errorMsg);              // guarda el error
+    onChange(newValue);
+    const errorMsg = validate(newValue);
+    setError(errorMsg);
   };
 
   return (
@@ -50,12 +58,12 @@ function InputField({
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={e => handleChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
       />
 
       {error && <span className="error-text">{error}</span>}
     </div>
   );
-}
+});
 
 export default InputField;

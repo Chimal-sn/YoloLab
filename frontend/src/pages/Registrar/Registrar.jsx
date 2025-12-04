@@ -2,6 +2,7 @@ import FormRegistrar from "../../components/Formulario_registrar/Formulario_regi
 import AuthLayout from "../../layout/AuthLayout/AuthLayout";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import Boton from "../../components/Boton/Boton";
 
 
 function Registrar() {
@@ -10,13 +11,12 @@ function Registrar() {
 
     const { registrar, loading, error } = useAuth();
     
-    const handleRegister = async ({ nombre, email, password }) => {
-        const result = await registrar(nombre, email, password);
+    const handleRegister = async ({ nombre, correo, password }) => {
+        const result = await registrar({nombre, correo, password});
         if (result.success) {
             navigate("/");
         }
     }
-        
     return (
         <AuthLayout>
             <FormRegistrar

@@ -8,12 +8,12 @@ export function useAuth(){
 
     //Funcion que recibe email y password
 
-    const login = async (email, password) => {
+    const login = async (correo, password) => {
         setLoading (true);
         setError("");
 
         try{
-            const data = await loginRequest (email, password);
+            const data = await loginRequest (correo, password);
 
             if (data.token){
                 localStorage.setItem("token", data.token);

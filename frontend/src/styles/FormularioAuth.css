@@ -1,11 +1,18 @@
-.form-registrar{
+.form{
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
 
-.error-registrar{
+.error{
     color: red;
     font-size: 0.9rem;
+}
+
+.navegador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
 }

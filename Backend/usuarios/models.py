@@ -20,7 +20,6 @@ class Usuario(AbstractBaseUser):
     id_usuario = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     correo = models.EmailField(unique=True)
-    rol = models.CharField(max_length=50, default='usuario')
     password = models.CharField(max_length=128)  # Ampliado para contraseñas hasheadas
     foto = models.ImageField(upload_to='Perfil/', null=True, blank=True)
 

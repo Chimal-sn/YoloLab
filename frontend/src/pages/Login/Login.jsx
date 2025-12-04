@@ -8,8 +8,8 @@ function Login() {
 
   const { login, loading, error } = useAuth();
   
-  const handleLogin = async ({ email, password }) => {
-    const result = await login(email, password);
+  const handleLogin = async ({correo, password }) => {
+    const result = await login(correo, password);
     if (result.success) {
       navigate("/"); 
     }

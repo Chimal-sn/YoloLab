@@ -1,8 +1,8 @@
 import axiosClient from "../utils/AxiosCliente";
 
-export async function loginRequest(email, password){
-    const response = await axiosClient.post("/api/login/", {
-        email,
+export async function loginRequest(correo, password){
+    const response = await axiosClient.post("/usuarios/API/IniciarSesion/", {
+        correo,
         password,
     });
 
@@ -10,7 +10,7 @@ export async function loginRequest(email, password){
 }
 
 export async function registrarRequest(userData) {
-    const response = await axiosClient.post("/api/registrar/", userData);
+    const response = await axiosClient.post("/usuarios/API/Registrar/", userData);
     return response.data;
 }
 
