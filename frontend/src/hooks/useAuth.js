@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { loginRequest } from "../services/authService";
 import { registrarRequest } from "../services/authService";
 import { obtenerUsuarioRequest } from "../services/authService";
@@ -28,7 +28,7 @@ export function useAuth() {
     }, []);
 
 
-    const login = async (correo, password) => {
+    const login = useCallback(async (correo, password) => {
         setLoading(true);
         setError("");
 
@@ -52,9 +52,9 @@ export function useAuth() {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
-    const registrar = async (userData) => {
+    const registrar = useCallback(async (userData) => {
         setLoading(true);
         setError("");
 
@@ -75,14 +75,14 @@ export function useAuth() {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
 
     //Funcion que cierra sesión
-    const logout = () => {
+    const logout = useCallback(() => {
         localStorage.removeItem("token");
         setUser(null);
-    };
+    }, []);
 
     return {
         user,
