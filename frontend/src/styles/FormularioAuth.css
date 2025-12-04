@@ -5,10 +5,15 @@
     width: 100%;
 }
 
-.error{
-    color: red;
-    font-size: 0.9rem;
+.error {
+  color: #EF4444;
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
+
+
 
 .navegador{
     display: flex;

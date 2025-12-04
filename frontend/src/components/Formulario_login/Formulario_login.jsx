@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import InputField from "../campo_formulario/campo_formulario";
 import Boton from "../Boton/Boton";
 import "../../styles/FormularioAuth.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 function FormLogin({ onSubmit, loading, error }) {
     const [correo, setCorreo] = useState("");
@@ -52,7 +53,20 @@ function FormLogin({ onSubmit, loading, error }) {
                 required={true}
             />
 
-            {error && <p className="error">{error}</p>}
+            <AnimatePresence mode="wait">
+                {error && (
+                    <motion.p
+                        key="error"
+                        className="error"
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        {error}
+                    </motion.p>
+                )}
+            </AnimatePresence>
 
             <Boton type="submit" disabled={loading}>
                 {loading ? "Cargando..." : "Iniciar sesión"}
