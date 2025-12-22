@@ -1,4 +1,4 @@
-button{
+button {
     font-weight: 500;
     border: none;
     border-radius: 8px;
@@ -8,26 +8,51 @@ button{
     font-family: "Manrope", sans-serif;
 }
 
-.primario{
+.primario {
     background-color: #3A7AFE;
     color: white;
 }
 
-.sin_fondo{
+.sin_fondo {
     background-color: transparent;
     color: #3A7AFE;
 }
 
-.logo{
+.logo {
     font-size: 1.9rem;
     background-color: transparent;
     color: #111827;
     padding: 0;
 }
 
-.Auth{
+.Auth {
     font-size: 1rem;
     font-weight: 700;
     background-color: transparent;
     color: #3A7AFE;
+}
+
+/* iconos */
+.boton-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.boton-text {
+    white-space: nowrap;
+}
+
+/* estilo para items de menú */
+.menu_item {
+    width: 100%;
+    justify-content: flex-start;
+    background: transparent;
+    color: #111827;
+    padding: 10px;
+    font-size: 0.95rem;
+}
+
+.menu_item:hover {
+    background: #f3f4f6;
 }

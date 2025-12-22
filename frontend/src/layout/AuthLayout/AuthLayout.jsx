@@ -19,15 +19,15 @@ function AuthLayout({ children }) {
                 <div className="header">
                     <Boton to="/" tipo="logo">YoloLab</Boton>
                 </div>
-                <div className ="contenedor_auth">
+                <div className="contenedor_auth">
 
-                    <div className = "contenedor_formulario">
-                        <div class = "formulario">
+                    <div className="contenedor_formulario">
+                        <div class="formulario">
                             {children}
                         </div>
                     </div>
-                    <div className = "imagen_auth">
-                        <img src = {fondo} alt="Imagen para formulario" />
+                    <div className="imagen_auth">
+                        <img src={fondo} alt="Imagen para formulario" />
                     </div>
                 </div>
             </>
