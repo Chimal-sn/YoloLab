@@ -1,0 +1,40 @@
+.boton-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-panel {
+    position: absolute;
+    top: 110%;
+    min-width: 200px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    z-index: 50;
+}
+
+/* alineación */
+.menu-panel.left {
+    left: 0;
+}
+
+.menu-panel.right {
+    right: 0;
+}
+
+/* estilo de cada opción usando tu Boton */
+.menu_item {
+    width: 100%;
+    justify-content: flex-start;
+    background: transparent;
+    color: #111827;
+    padding: 10px 10px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+}
+
+.menu_item:hover {
+    background: #f3f4f6;
+}
