@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registrar" element={<Registrar />} />
+
       </Routes>
     </AnimatePresence>
   );
