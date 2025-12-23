@@ -7,6 +7,8 @@ function BotonMenu({
     label,
     tipo = "boton_dashboard",
     iconRight,          // icono del botón principal (opcional)
+    iconLeft,           // icono del botón principal (opcional)
+    iconSize = 24,
     opciones = [],      // [{ label, to?, onClick?, icon? }]
     align = "left",     // "left" | "right"
 }) {
@@ -41,6 +43,8 @@ function BotonMenu({
                 tipo={tipo}
                 onClick={toggle}       // click alterna (útil para móvil)
                 iconRight={iconRight}
+                iconLeft={iconLeft}
+                iconSize={iconSize}
             >
                 {label}
             </Boton>

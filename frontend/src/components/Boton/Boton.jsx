@@ -9,6 +9,7 @@ function Boton({
   tipo = "primario",
   iconLeft,
   iconRight,
+  iconSize = 24,
   anim = true,
   ...props
 }) {
@@ -23,9 +24,9 @@ function Boton({
 
   const contenido = (
     <>
-      {iconLeft && <span className="boton-icon left"><Icon name={iconLeft} /></span>}
+      {iconLeft && <span className="boton-icon left"><Icon name={iconLeft} size={iconSize} /></span>}
       <span className="boton-text">{children}</span>
-      {iconRight && <span className="boton-icon right"><Icon name={iconRight} /></span>}
+      {iconRight && <span className="boton-icon right"><Icon name={iconRight} size={iconSize} /></span>}
     </>
   );
 

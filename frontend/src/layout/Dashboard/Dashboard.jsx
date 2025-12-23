@@ -4,7 +4,7 @@ import BotonMenu from "../../components/BotonMenu/BotonMenu";
 import Boton from "../../components/Boton/Boton";
 import { useAuthContext } from "../../context/AuthContext";
 import foto_perfil from "../../assets/perfil_default.png";
-import Icon from "../../components/Icon/Icon";
+
 
 function Dashboard({ children }) {
     const { user, loadingUser } = useAuthContext();
@@ -21,9 +21,10 @@ function Dashboard({ children }) {
                 </div>
 
                 <BotonMenu
-                    label="Menu"
+                    label="Modelos"
                     tipo="boton_dashboard"
-                    iconRight="modelo"
+                    iconLeft="modelo"
+                    iconSize={30}
                     opciones={[
                         { label: "Dashboard", to: "/dashboard" },
                         { label: "Users", to: "/users" },

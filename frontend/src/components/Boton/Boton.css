@@ -32,25 +32,21 @@ button {
     color: #3A7AFE;
 }
 
-/* iconos */
-.boton-icon {
-    display: flex;
-    align-items: center;
-    font-size: 1.1em;
-}
-
 .boton-text {
     white-space: nowrap;
 }
 
 .boton_dashboard {
+    display: flex;
+    font-weight: 200;
     font-size: 1.2rem;
     background-color: transparent;
     color: #CBD5E1;
     padding: 0;
+    gap: 10px;
+
 }
 
-/* estilo para items de menú */
 .menu_item {
     width: 100%;
     justify-content: flex-start;

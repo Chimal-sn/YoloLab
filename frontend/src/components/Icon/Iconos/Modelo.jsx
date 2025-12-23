@@ -1,4 +1,4 @@
-export default function Modelo({ size = 18, className = "" }) {
+export default function Modelo({ size = 36, className = "" }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
