@@ -1,16 +1,52 @@
-.body_dashboard {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
 .dashboard {
     display: flex;
-    flex-direction: column;
     height: 100vh;
 }
 
-.contenedor_dashboard {
-    flex: 1;
+/* Sidebar fijo */
+.sidebar {
+    width: 220px;
+    background: #0F172A;
+    color: white;
+    padding: 20px 16px;
+}
+
+.logo {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.logo h2 {
+    font-size: 2.5rem;
+    font-weight: 200;
+}
+
+.info_perfil {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.info_perfil img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info_perfil p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: white;
+    margin: 0;
+}
+
+/* Área derecha */
+.main {
+    flex: 1;
+    background: #F4F6FB;
+    padding: 24px;
+    overflow: auto;
 }

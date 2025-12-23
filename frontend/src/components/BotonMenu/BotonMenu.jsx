@@ -5,7 +5,7 @@ import "./BotonMenu.css";
 
 function BotonMenu({
     label,
-    tipo = "primario",
+    tipo = "boton_dashboard",
     iconRight,          // icono del botón principal (opcional)
     opciones = [],      // [{ label, to?, onClick?, icon? }]
     align = "left",     // "left" | "right"

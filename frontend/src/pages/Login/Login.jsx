@@ -7,11 +7,11 @@ function Login() {
   const navigate = useNavigate();
 
   const { login, loading, error } = useAuth();
-  
-  const handleLogin = async ({correo, password }) => {
+
+  const handleLogin = async ({ correo, password }) => {
     const result = await login(correo, password);
     if (result.success) {
-      navigate("/"); 
+      navigate("/Perfil");
     }
   }
 

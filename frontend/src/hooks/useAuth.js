@@ -7,20 +7,24 @@ export function useAuth() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [user, setUser] = useState(null);
-
+    const [loadingUser, setLoadingUser] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (!token) return;
+        if (!token) {
+            setLoadingUser(false);
+            return;
+        }
 
         const fetchUser = async () => {
             try {
                 const data = await obtenerUsuarioRequest();
                 setUser(data);
             } catch (err) {
-                console.log("Token inválido o expirado");
                 localStorage.removeItem("token");
                 setUser(null);
+            } finally {
+                setLoadingUser(false);
             }
         };
 
@@ -86,6 +90,7 @@ export function useAuth() {
 
     return {
         user,
+        loadingUser,
         login,
         registrar,
         logout,

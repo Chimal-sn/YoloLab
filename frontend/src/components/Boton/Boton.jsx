@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Boton.css";
+import Icon from "../Icon/Icon";
 
 function Boton({
   children,
@@ -22,9 +23,9 @@ function Boton({
 
   const contenido = (
     <>
-      {iconLeft && <span className="boton-icon left">{iconLeft}</span>}
+      {iconLeft && <span className="boton-icon left"><Icon name={iconLeft} /></span>}
       <span className="boton-text">{children}</span>
-      {iconRight && <span className="boton-icon right">{iconRight}</span>}
+      {iconRight && <span className="boton-icon right"><Icon name={iconRight} /></span>}
     </>
   );
 
