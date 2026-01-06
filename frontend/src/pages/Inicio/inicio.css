@@ -4,13 +4,13 @@
   flex-direction: column;
 }
 
-.header{
+.header {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.sesion{
+.sesion {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -21,16 +21,16 @@
   height: 85vh;
 }
 
-.titulo{
+.titulo {
   flex: 1;
   display: flex;
   align-items: center;
   font-size: 5rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #111827;
 }
 
-.imagen-inicio{
+.imagen-inicio {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -38,7 +38,7 @@
 
 }
 
-.contenedor-inicio img{
+.contenedor-inicio img {
   width: 100%;
   height: auto;
 

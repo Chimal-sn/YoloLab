@@ -31,6 +31,17 @@ function Dashboard({ children }) {
                         { label: "Products", to: "/products" },
                     ]}
                 />
+                <BotonMenu
+                    label="Datasets"
+                    tipo="boton_dashboard"
+                    iconLeft="dataset"
+                    iconSize={30}
+                    opciones={[
+                        { label: "Dashboard", to: "/dashboard" },
+                        { label: "Users", to: "/users" },
+                        { label: "Products", to: "/products" },
+                    ]}
+                />
             </aside>
 
             <main className="main">
