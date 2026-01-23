@@ -9,48 +9,46 @@ import foto_perfil from "../../assets/perfil_default.png";
 function Dashboard({ children }) {
     const { user, loadingUser } = useAuthContext();
 
+    if (loadingUser) {
+        return (
+            <div className="dashboard">
+                <main className="main">
+                    <div className="panel">Cargando usuario...</div>
+                </main>
+            </div>
+        );
+    }
+
+    // Si ya terminó de cargar y no hay user, probablemente no hay sesión válida
+    if (!user) {
+        return (
+            <div className="dashboard">
+                <main className="main">
+                    <div className="panel">No hay sesión activa.</div>
+                </main>
+            </div>
+        );
+    }
+
     return (
         <div className="dashboard">
             <aside className="sidebar">
                 <div className="logo"><Boton to="/" tipo="logo">YoloLab</Boton></div>
+
                 <div className="info_perfil">
-                    <img
-                        src={user?.foto || foto_perfil}
-                        alt="" />
-                    <p>{user?.nombre}</p>
+                    <img src={user.foto || foto_perfil} alt="" />
+                    <p>{user.nombre}</p>
                 </div>
 
-                <BotonMenu
-                    label="Modelos"
-                    tipo="boton_dashboard"
-                    iconLeft="modelo"
-                    iconSize={30}
-                    opciones={[
-                        { label: "Dashboard", to: "/dashboard" },
-                        { label: "Users", to: "/users" },
-                        { label: "Products", to: "/products" },
-                    ]}
-                />
-                <BotonMenu
-                    label="Datasets"
-                    tipo="boton_dashboard"
-                    iconLeft="dataset"
-                    iconSize={30}
-                    opciones={[
-                        { label: "Dashboard", to: "/dashboard" },
-                        { label: "Users", to: "/users" },
-                        { label: "Products", to: "/products" },
-                    ]}
-                />
+                {/* ... */}
             </aside>
 
             <main className="main">
-                <div className="panel">
-                    {children}
-                </div>
+                <div className="panel">{children}</div>
             </main>
         </div>
     );
 }
+
 
 export default Dashboard;
