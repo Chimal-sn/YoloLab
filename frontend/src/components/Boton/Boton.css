@@ -25,6 +25,11 @@ button {
     padding: 0;
 }
 
+.logo_dashboard {
+    background-color: transparent;
+    color: #ffffff;
+}
+
 .Auth {
     font-size: 1rem;
     font-weight: 700;
