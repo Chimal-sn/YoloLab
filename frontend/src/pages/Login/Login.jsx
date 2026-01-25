@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import FormLogin from "../../components/Formulario_login/Formulario_login";
+import FormLogin from "../../components/Formularios/Formulario_login/Formulario_login";
 import AuthLayout from "../../layout/AuthLayout/AuthLayout";
 import { useAuthContext } from "../../context/AuthContext";
 

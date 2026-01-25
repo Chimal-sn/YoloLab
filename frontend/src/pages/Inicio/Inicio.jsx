@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./Inicio.css";
 import fondo from "../../assets/img_inicio.png";
-import Boton from "../../components/Boton/Boton";
+import Boton from "../../components/Botones/Boton/Boton";
 import PageTransition from "../../components/Transicion/Transicion";
 import { motion } from "framer-motion";
 
@@ -22,10 +22,10 @@ function Inicio() {
           <Boton to="/" tipo="logo">YoloLab</Boton>
 
           <div className="sesion">
-            <Boton to="/login" tipo = "sin_fondo">Iniciar Sesión</Boton>
-            <Boton to= "/registrar">Registrarse</Boton>
+            <Boton to="/login" tipo="sin_fondo">Iniciar Sesión</Boton>
+            <Boton to="/registrar">Registrarse</Boton>
           </div>
-          
+
         </div>
 
         <div className="contenedor-inicio">

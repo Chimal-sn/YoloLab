@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./Dashboard.css";
-import BotonMenu from "../../components/BotonMenu/BotonMenu";
+import BotonMenu from "../../components/Botones/BotonMenu/BotonMenu";
 import Boton from "../../components/Botones/Boton/Boton";
 import { useAuthContext } from "../../context/AuthContext";
 import foto_perfil from "../../assets/perfil_default.png";

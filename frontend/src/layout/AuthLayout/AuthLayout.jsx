@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./AuthLayout.css";
 import fondo from "../../assets/img_formulario.png";
-import Boton from "../../components/Boton/Boton";
+import Boton from "../../components/Botones/Boton/Boton";
 import PageTransition from "../../components/Transicion/Transicion";
 
 function AuthLayout({ children }) {

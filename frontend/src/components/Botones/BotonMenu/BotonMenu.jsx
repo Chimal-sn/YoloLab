@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Boton from "../Botones/Boton/Boton";
+import Boton from "../../Botones/Boton/Boton";
 import "./BotonMenu.css";
 
 function BotonMenu({

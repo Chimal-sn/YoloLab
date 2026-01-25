@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import InputField from "../campo_formulario/campo_formulario";
 import Boton from "../../Botones/Boton/Boton";
-import "../../styles/FormularioAuth.css";
+import "../../../styles/FormularioAuth.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 function FormLogin({ onSubmit, loading, error }) {
