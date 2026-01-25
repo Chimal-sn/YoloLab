@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import InputField from "../campo_formulario/campo_formulario";
-import Boton from "../Boton/Boton";
+import Boton from "../../Botones/Boton/Boton";
 import "../../styles/FormularioAuth.css";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,18 +21,18 @@ function FormLogin({ onSubmit, loading, error }) {
 
         // Si hay errores → NO continuar
         if (correoError || passwordError) {
-        return;
+            return;
         }
 
         // Si todo está correcto se envía
         if (onSubmit) {
-        onSubmit({ correo, password });
+            onSubmit({ correo, password });
         }
     };
 
     return (
         <form className="form" onSubmit={handleSubmit}>
-        
+
             <InputField
                 ref={correoRef}
                 label="Correo"
@@ -73,7 +73,7 @@ function FormLogin({ onSubmit, loading, error }) {
             </Boton>
 
             <div className="navegador">
-                <p>¿No tienes cuenta?</p> <Boton to="/registrar" tipo = "Auth" >Regístrate Ahora</Boton>
+                <p>¿No tienes cuenta?</p> <Boton to="/registrar" tipo="Auth" >Regístrate Ahora</Boton>
             </div>
 
         </form>

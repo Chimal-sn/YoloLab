@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Boton.css";
-import Icon from "../Icon/Icon";
+import Icon from "../../Icon/Icon";
 
 function Boton({
   children,
