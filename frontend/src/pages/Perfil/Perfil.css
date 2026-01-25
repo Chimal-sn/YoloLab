@@ -1,0 +1,17 @@
+.Perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.detalle_perfil {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.img_perfil img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    object-fit: cover;
+}

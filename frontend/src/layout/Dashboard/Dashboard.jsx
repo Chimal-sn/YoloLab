@@ -18,7 +18,7 @@ function Dashboard({ children }) {
                 </div>
 
                 <div className="info_perfil">
-                    <img src={user?.foto || foto_perfil} alt="" />
+                    <img src={user?.foto || foto_perfil} alt="foto_perfil" />
                     <p>{user?.nombre}</p>
                 </div>
 
