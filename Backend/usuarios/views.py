@@ -51,9 +51,11 @@ class IniciarSesionView(APIView):
         }, status=status.HTTP_200_OK)
 
 #Funcion que recupera la informacion del usuario
-class ObtenerUsuarioView(APIView):
+class UsuarioView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         usuario = request.user
         usuarioSerializado = UsuarioSerializer(usuario)
         return Response(usuarioSerializado.data)
+
+    

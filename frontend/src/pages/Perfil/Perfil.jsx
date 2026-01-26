@@ -36,22 +36,7 @@ function Perfil() {
             </div>
 
             <Modal isOpen={editar} onClose={() => setEditar(false)}>
-                <h2>Editar Perfil</h2>
 
-                <form>
-                    <input
-                        type="text"
-                        placeholder="Nombre"
-                        defaultValue={user?.nombre || ""}
-                    />
-                    <input
-                        type="email"
-                        placeholder="Correo"
-                        defaultValue={user?.correo || ""}
-                    />
-
-                    <Boton tipo="primario">Guardar Cambios</Boton>
-                </form>
             </Modal>
 
         </Dashboard>

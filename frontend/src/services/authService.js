@@ -14,7 +14,7 @@ export async function registrarRequest(userData) {
 }
 
 export async function obtenerUsuarioRequest() {
-    const response = await axiosClient.get("/usuarios/API/ObtenerUsuario/");
+    const response = await axiosClient.get("/usuarios/me/");
     return response.data;
 }
 
