@@ -1,6 +1,7 @@
+// Modal.jsx
 import "./Modal.css";
 
-function Modal({ isOpen, onClose, children }) {
+function Modal({ isOpen, onClose, title, children }) {
     if (!isOpen) return null;
 
     return (
@@ -9,7 +10,23 @@ function Modal({ isOpen, onClose, children }) {
                 className="modal_contenido"
                 onClick={(e) => e.stopPropagation()}
             >
-                {children}
+                {/* Botón cerrar */}
+                <button
+                    className="modal_close"
+                    onClick={onClose}
+                    aria-label="Cerrar"
+                    type="button"
+                >
+                    ✕
+                </button>
+
+                <div className="modal_header">
+                    <h3>{title}</h3>
+                </div>
+
+                <div className="modal_body">
+                    {children}
+                </div>
             </div>
         </div>
     );

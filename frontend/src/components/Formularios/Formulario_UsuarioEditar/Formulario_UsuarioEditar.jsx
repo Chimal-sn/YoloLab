@@ -4,17 +4,13 @@ import Boton from "../../Botones/Boton/Boton";
 import { motion, AnimatePresence } from "framer-motion";
 
 
-function Form_UsuarioEditar({ onSubmit, loading, error }) {
-    const [nombre, setNombre] = useState("");
-    const [apellido, setApellido] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [password, setPassword] = useState("");
-    const [foto, setFoto] = useState("");
+function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
+    const [nombre, setNombre] = useState(usuario?.nombre || "");
+    const [correo, setCorreo] = useState(usuario?.correo || "");
+    const [foto, setFoto] = useState(usuario?.foto || "");
 
     const nombreRef = useRef();
-    const apellidoRef = useRef();
     const correoRef = useRef();
-    const passwordRef = useRef();
     const fotoRef = useRef();
 
     const handleSubmit = (e) => {
@@ -22,19 +18,17 @@ function Form_UsuarioEditar({ onSubmit, loading, error }) {
 
         // Validar usando los métodos expuestos por InputField
         const nombreError = nombreRef.current.validate();
-        const apellidoError = apellidoRef.current.validate();
         const correoError = correoRef.current.validate();
-        const passwordError = passwordRef.current.validate();
         const fotoError = fotoRef.current.validate();
 
         // Si hay errores → NO continuar
-        if (nombreError || apellidoError || correoError || passwordError || fotoError) {
+        if (nombreError || correoError || fotoError) {
             return;
         }
 
         // Si todo está correcto se envía
         if (onSubmit) {
-            onSubmit({ nombre, apellido, correo, password, foto });
+            onSubmit({ nombre, correo, foto });
         }
     };
 
@@ -50,15 +44,7 @@ function Form_UsuarioEditar({ onSubmit, loading, error }) {
                 onChange={setNombre}
                 required={true}
             />
-            <InputField
-                ref={apellidoRef}
-                label="Apellido"
-                type="text"
-                placeholder="Apellido"
-                value={apellido}
-                onChange={setApellido}
-                required={true}
-            />
+
             <InputField
                 ref={correoRef}
                 label="Correo"
@@ -68,15 +54,7 @@ function Form_UsuarioEditar({ onSubmit, loading, error }) {
                 onChange={setCorreo}
                 required={true}
             />
-            <InputField
-                ref={passwordRef}
-                label="Contraseña"
-                type="password"
-                placeholder="********"
-                value={password}
-                onChange={setPassword}
-                required={true}
-            />
+
             <InputField
                 ref={fotoRef}
                 label="Foto"
@@ -84,7 +62,7 @@ function Form_UsuarioEditar({ onSubmit, loading, error }) {
                 placeholder="Foto"
                 value={foto}
                 onChange={setFoto}
-                required={true}
+                required={false}
             />
             <AnimatePresence mode="wait">
                 {error && (
@@ -106,3 +84,5 @@ function Form_UsuarioEditar({ onSubmit, loading, error }) {
         </form>
     );
 }
+
+export default FormUsuarioEditar;

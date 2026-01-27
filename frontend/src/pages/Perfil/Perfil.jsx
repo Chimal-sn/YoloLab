@@ -5,10 +5,21 @@ import "./Perfil.css";
 import Boton from "../../components/Botones/Boton/Boton";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
+import FormUsuarioEditar from "../../components/Formularios/Formulario_UsuarioEditar/Formulario_UsuarioEditar";
+import { useUsuarios } from "../../hooks/useUsuarios";
 
 function Perfil() {
     const { user } = useAuthContext();
     const [editar, setEditar] = useState(false);
+
+    const { EditarUsuario, loading, error } = useUsuarios();
+
+    const handleSubmit = async ({ nombre, correo, foto }) => {
+        const result = await EditarUsuario(nombre, correo, foto);
+        console.log(result);
+        setEditar(false);
+    };
+
 
     return (
         <Dashboard>
@@ -35,7 +46,18 @@ function Perfil() {
                 </div>
             </div>
 
-            <Modal isOpen={editar} onClose={() => setEditar(false)}>
+            <Modal
+                isOpen={editar}
+                onClose={() => setEditar(false)}
+                title="Editar Perfil"
+            >
+
+                <FormUsuarioEditar
+                    onSubmit={handleSubmit}
+                    loading={loading}
+                    error={error}
+                    usuario={user}
+                />
 
             </Modal>
 

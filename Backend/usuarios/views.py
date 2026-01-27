@@ -58,4 +58,19 @@ class UsuarioView(APIView):
         usuarioSerializado = UsuarioSerializer(usuario)
         return Response(usuarioSerializado.data)
 
+    def put(self, request):
+        try:
+            usuario = request.user
+            nombre = request.data.get('nombre')
+            correo = request.data.get('correo')
+            foto = request.data.get('foto')
+            usuario.nombre = nombre
+            usuario.correo = correo
+            usuario.foto = foto
+            usuario.save()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     
