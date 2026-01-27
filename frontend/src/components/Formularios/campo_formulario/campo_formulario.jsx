@@ -16,6 +16,15 @@ const InputField = forwardRef(({
     const [error, setError] = useState("");
 
     const validate = (valueToCheck = value) => {
+        // 🔹 Caso especial: file
+        if (type === "file") {
+            if (required && !valueToCheck) {
+                return "Debe seleccionar un archivo";
+            }
+            return "";
+        }
+
+        // 🔹 Validaciones normales (string)
         if (required && valueToCheck.trim() === "") {
             return "Este campo es obligatorio";
         }
@@ -32,10 +41,10 @@ const InputField = forwardRef(({
             return "Solo se permiten caracteres alfabéticos";
         }
 
-        return ""; // Sin errores
+        return "";
     };
 
-    // Exponemos validate() para el formulario padre
+    // 🔹 Exponemos validate() al padre
     useImperativeHandle(ref, () => ({
         validate: () => {
             const err = validate();
@@ -44,10 +53,18 @@ const InputField = forwardRef(({
         }
     }));
 
-    const handleChange = (newValue) => {
-        onChange(newValue);
-        const errorMsg = validate(newValue);
-        setError(errorMsg);
+    const handleChange = (e) => {
+        if (type === "file") {
+            const file = e.target.files?.[0] || null;
+            onChange(file);
+            const err = validate(file);
+            setError(err);
+        } else {
+            const newValue = e.target.value;
+            onChange(newValue);
+            const err = validate(newValue);
+            setError(err);
+        }
     };
 
     return (
@@ -57,8 +74,8 @@ const InputField = forwardRef(({
             <input
                 type={type}
                 placeholder={placeholder}
-                value={value}
-                onChange={(e) => handleChange(e.target.value)}
+                {...(type !== "file" && { value })}
+                onChange={handleChange}
             />
 
             {error && <span className="error-text">{error}</span>}

@@ -1,0 +1,53 @@
+/* Contenedor del avatar */
+.avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 28px;
+    /* espacio para el botón */
+}
+
+/* Imagen circular */
+.avatar_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+
+.avatar_edit {
+    position: absolute;
+
+    /* 🔑 esquina superior derecha */
+    top: -10px;
+    right: -10px;
+
+    width: 38px;
+    height: 38px;
+
+    background: #ffffff;
+    border-radius: 50%;
+    border: 1.5px solid #111827;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.avatar_edit:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* Input file oculto */
+.avatar_input {
+    display: none;
+}

@@ -2,39 +2,44 @@ import { useState, useRef } from "react";
 import InputField from "../campo_formulario/campo_formulario";
 import Boton from "../../Botones/Boton/Boton";
 import { motion, AnimatePresence } from "framer-motion";
-
+import FotoEditable from "../CampoFotoEditable/Campo_foto";
+import foto_default from "../../../assets/perfil_default.png"
 
 function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
     const [nombre, setNombre] = useState(usuario?.nombre || "");
     const [correo, setCorreo] = useState(usuario?.correo || "");
-    const [foto, setFoto] = useState(usuario?.foto || "");
+
+    const [fotoPreview, setFotoPreview] = useState(usuario?.foto || "");
+    const [fotoFile, setFotoFile] = useState(null);
 
     const nombreRef = useRef();
     const correoRef = useRef();
-    const fotoRef = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Validar usando los métodos expuestos por InputField
-        const nombreError = nombreRef.current.validate();
-        const correoError = correoRef.current.validate();
-        const fotoError = fotoRef.current.validate();
+        const nombreError = nombreRef.current?.validate?.();
+        const correoError = correoRef.current?.validate?.();
 
-        // Si hay errores → NO continuar
-        if (nombreError || correoError || fotoError) {
-            return;
-        }
+        if (nombreError || correoError) return;
 
-        // Si todo está correcto se envía
         if (onSubmit) {
-            onSubmit({ nombre, correo, foto });
+            onSubmit({ nombre, correo, foto: fotoFile });
         }
     };
 
-
     return (
         <form className="form" onSubmit={handleSubmit}>
+
+            <FotoEditable
+                fotoPreview={fotoPreview || foto_default}
+                onFileSelected={(file) => {
+                    setFotoFile(file);
+                    setFotoPreview(URL.createObjectURL(file));
+                }}
+            />
+
+
             <InputField
                 ref={nombreRef}
                 label="Nombre"
@@ -55,15 +60,8 @@ function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
                 required={true}
             />
 
-            <InputField
-                ref={fotoRef}
-                label="Foto"
-                type="file"
-                placeholder="Foto"
-                value={foto}
-                onChange={setFoto}
-                required={false}
-            />
+
+
             <AnimatePresence mode="wait">
                 {error && (
                     <motion.p
@@ -78,6 +76,7 @@ function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
                     </motion.p>
                 )}
             </AnimatePresence>
+
             <Boton type="submit" disabled={loading}>
                 {loading ? "Cargando..." : "Editar Perfil"}
             </Boton>
