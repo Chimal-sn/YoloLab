@@ -4,6 +4,7 @@ import Boton from "../../Botones/Boton/Boton";
 import { motion, AnimatePresence } from "framer-motion";
 import FotoEditable from "../CampoFotoEditable/Campo_foto";
 import foto_default from "../../../assets/perfil_default.png"
+import { getFotoUrl } from "../../../utils/GetFotoUrl";
 
 function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
     const [nombre, setNombre] = useState(usuario?.nombre || "");
@@ -32,7 +33,7 @@ function FormUsuarioEditar({ onSubmit, loading, error, usuario }) {
         <form className="form" onSubmit={handleSubmit}>
 
             <FotoEditable
-                fotoPreview={fotoPreview || foto_default}
+                fotoPreview={getFotoUrl(fotoPreview) || foto_default}
                 onFileSelected={(file) => {
                     setFotoFile(file);
                     setFotoPreview(URL.createObjectURL(file));
