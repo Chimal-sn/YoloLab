@@ -8,10 +8,11 @@ export function useUsuarios() {
 
     const EditarUsuario = useCallback(async (nombre, correo, foto) => {
         setLoading(true);
+        setError(null);
         try {
             const response = await editarPerfilRequest({ nombre, correo, foto });
             setUsuario(response);
-
+            return { success: true };
         } catch (error) {
             const msg =
                 error?.response?.data?.error ||
@@ -19,6 +20,7 @@ export function useUsuarios() {
                 error?.message ||
                 "Error en el servidor";
             setError(msg);
+            return { success: false, error: msg };
         } finally {
             setLoading(false);
         }

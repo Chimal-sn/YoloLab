@@ -1,13 +1,13 @@
 // Modal.jsx
 import "./Modal.css";
 
-function Modal({ isOpen, onClose, title, children }) {
+function Modal({ isOpen, onClose, title, children, type = "default" }) {
     if (!isOpen) return null;
 
     return (
         <div className="modal_overlay">
             <div
-                className="modal_contenido"
+                className={`${type}`}
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Botón cerrar */}

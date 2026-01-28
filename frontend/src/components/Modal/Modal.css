@@ -8,9 +8,17 @@
     z-index: 1000;
 }
 
-.modal_contenido {
+.default {
     position: relative;
-    /* 🔑 CLAVE */
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 420px;
+    max-width: 95%;
+}
+
+.confirmacion {
+    position: relative;
     background: white;
     padding: 24px;
     border-radius: 12px;

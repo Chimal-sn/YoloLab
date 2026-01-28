@@ -12,13 +12,18 @@ import { getFotoUrl } from "../../utils/GetFotoUrl";
 function Perfil() {
     const { user } = useAuthContext();
     const [editar, setEditar] = useState(false);
+    const [confirmacion, setConfirmacion] = useState(false);
 
     const { EditarUsuario, loading, error } = useUsuarios();
 
     const handleSubmit = async ({ nombre, correo, foto }) => {
         const result = await EditarUsuario(nombre, correo, foto);
         console.log(result);
-        setEditar(false);
+        if (result.success) {
+            setConfirmacion(true);
+            setEditar(false);
+        }
+
     };
 
 
@@ -60,6 +65,15 @@ function Perfil() {
                     usuario={user}
                 />
 
+            </Modal>
+
+            <Modal
+                isOpen={confirmacion}
+                onClose={() => setConfirmacion(false)}
+                title="Confirmación"
+                type="confirmacion"
+            >
+                <p>Perfil editado correctamente</p>
             </Modal>
 
         </Dashboard>
