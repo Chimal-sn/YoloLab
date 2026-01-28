@@ -7,6 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
 import FormUsuarioEditar from "../../components/Formularios/Formulario_UsuarioEditar/Formulario_UsuarioEditar";
 import { useUsuarios } from "../../hooks/useUsuarios";
+import { getFotoUrl } from "../../utils/GetFotoUrl";
 
 function Perfil() {
     const { user } = useAuthContext();
@@ -26,7 +27,7 @@ function Perfil() {
             <div className="Perfil">
                 <div className="detalle_perfil">
                     <div className="img_perfil">
-                        <img src={user?.foto || foto_perfil} alt="foto_perfil" />
+                        <img src={getFotoUrl(user?.foto) || foto_perfil} alt="foto_perfil" />
                     </div>
                     <div className="detalle">
                         <p>{user?.nombre}</p>

@@ -4,6 +4,7 @@ import BotonMenu from "../../components/Botones/BotonMenu/BotonMenu";
 import Boton from "../../components/Botones/Boton/Boton";
 import { useAuthContext } from "../../context/AuthContext";
 import foto_perfil from "../../assets/perfil_default.png";
+import { getFotoUrl } from "../../utils/GetFotoUrl";
 
 function Dashboard({ children }) {
     const { user, loadingUser } = useAuthContext();
@@ -18,7 +19,7 @@ function Dashboard({ children }) {
                 </div>
 
                 <div className="info_perfil">
-                    <img src={user?.foto || foto_perfil} alt="foto_perfil" />
+                    <img src={getFotoUrl(user?.foto) || foto_perfil} alt="foto_perfil" />
                     <p>{user?.nombre}</p>
                 </div>
 

@@ -14,9 +14,9 @@ export function useUsuarios() {
 
         } catch (error) {
             const msg =
-                err?.response?.data?.error ||
-                err?.response?.data?.detail ||
-                err?.message ||
+                error?.response?.data?.error ||
+                error?.response?.data?.detail ||
+                error?.message ||
                 "Error en el servidor";
             setError(msg);
         } finally {

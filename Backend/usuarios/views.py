@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Usuario
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 #Funcion que registra un nuevo usuario
@@ -50,9 +51,10 @@ class IniciarSesionView(APIView):
             'usuario': usuarioSerializado.data
         }, status=status.HTTP_200_OK)
 
-#Funcion que recupera la informacion del usuario
 class UsuarioView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser] 
+    
     def get(self, request):
         usuario = request.user
         usuarioSerializado = UsuarioSerializer(usuario)
@@ -63,10 +65,12 @@ class UsuarioView(APIView):
             usuario = request.user
             nombre = request.data.get('nombre')
             correo = request.data.get('correo')
-            foto = request.data.get('foto')
+            foto = request.FILES.get('foto')
+            
+            if foto:
+                usuario.foto = foto
             usuario.nombre = nombre
             usuario.correo = correo
-            usuario.foto = foto
             usuario.save()
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
