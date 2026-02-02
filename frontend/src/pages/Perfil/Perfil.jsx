@@ -18,7 +18,6 @@ function Perfil() {
 
     const handleSubmit = async ({ nombre, correo, foto }) => {
         const result = await EditarUsuario(nombre, correo, foto);
-        console.log(result);
         if (result.success) {
             setConfirmacion(true);
             setEditar(false);
@@ -74,6 +73,7 @@ function Perfil() {
                 type="confirmacion"
             >
                 <p>Perfil editado correctamente</p>
+                <Boton tipo="boton_confirmacion" onClick={() => setConfirmacion(false)}>Aceptar</Boton>
             </Modal>
 
         </Dashboard>

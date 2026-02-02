@@ -64,3 +64,8 @@ button {
 .menu_item:hover {
     background: #f3f4f6;
 }
+
+.boton_confirmacion {
+    background-color: #17bd5f;
+    color: white;
+}
