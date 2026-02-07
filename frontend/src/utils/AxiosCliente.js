@@ -1,36 +1,67 @@
-// src/utils/axiosClient.js
-
 import axios from "axios";
 
-// 1. Crear instancia de axios con configuración base
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
+    withCredentials: true,
 });
 
-// 2. Interceptor que agrega el token automáticamente
-axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+let isRefreshing = false;
+let pendingRequests = [];
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+function onRefreshed() {
+    pendingRequests.forEach((cb) => cb());
+    pendingRequests = [];
+}
 
-  return config;
-});
+function addPendingRequest(cb) {
+    pendingRequests.push(cb);
+}
 
-// 3. Interceptor para manejar errores globalmente
 axiosClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response) {
-      return Promise.reject(error.response);
-    }
+    (response) => response,
+    async (error) => {
+        if (!error.response) {
+            return Promise.reject({
+                status: 500,
+                data: { error: "Error de conexión con el servidor" },
+            });
+        }
 
-    return Promise.reject({
-      status: 500,
-      data: { error: "Error de conexión con el servidor" },
-    });
-  }
+        const status = error.response.status;
+        const config = error.config; // ✅ aquí está la request original
+
+        // Evitar loop: si el 401 viene del refresh, ya no reintentes refresh
+        if (config?.url?.includes("/usuarios/refresh/")) {
+            return Promise.reject(error.response);
+        }
+
+        if (status === 401 && config && !config._retry) {
+            config._retry = true;
+
+            if (isRefreshing) {
+                return new Promise((resolve) => {
+                    addPendingRequest(() => resolve(axiosClient(config)));
+                });
+            }
+
+            isRefreshing = true;
+
+            try {
+                await axiosClient.post("/usuarios/refresh/"); // ✅ ruta correcta
+
+                isRefreshing = false;
+                onRefreshed();
+
+                return axiosClient(config); // reintenta original
+            } catch (refreshErr) {
+                isRefreshing = false;
+                pendingRequests = [];
+                return Promise.reject(refreshErr.response || refreshErr);
+            }
+        }
+
+        return Promise.reject(error.response);
+    }
 );
 
 export default axiosClient;

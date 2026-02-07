@@ -7,6 +7,35 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Usuario
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.parsers import MultiPartParser, FormParser
+from django.conf import settings
+
+class RefreshTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        refresh_token = request.COOKIES.get("refresh")
+        if not refresh_token:
+            return Response({"error": "No refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            access_token = str(refresh.access_token)
+        except Exception:
+            return Response({"error": "Refresh inválido"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        response = Response({"ok": True}, status=status.HTTP_200_OK)
+
+        response.set_cookie(
+            key="access",
+            value=access_token,
+            httponly=True,
+            secure=settings.COOKIE_SECURE,
+            samesite=settings.COOKIE_SAMESITE,
+            domain=settings.COOKIE_DOMAIN,
+            max_age=15 * 60
+        )
+
+        return response
 
 
 #Funcion que registra un nuevo usuario
@@ -26,36 +55,63 @@ class RegistrarUsuarioView(APIView):
 #Funcion que inicia sesion
 class IniciarSesionView(APIView):
     permission_classes = [AllowAny]
-    
+
     def post(self, request):
         correo = request.data.get('correo')
         password = request.data.get('password')
-        
+
         try:
             usuario = Usuario.objects.get(correo=correo)
         except Usuario.DoesNotExist:
             return Response({'error': 'Correo no registrado'}, status=status.HTTP_404_NOT_FOUND)
-        
+
         if not usuario.check_password(password):
             return Response({'error': 'Contraseña incorrecta'}, status=status.HTTP_401_UNAUTHORIZED)
+
         
         refresh = RefreshToken.for_user(usuario)
-        
-        refresh['correo'] = usuario.correo
-        
+        refresh['correo'] = usuario.correo  
+
+        access_token = str(refresh.access_token)
+        refresh_token = str(refresh)
+
         usuarioSerializado = UsuarioSerializer(usuario)
-        
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+
+        response = Response({
             'usuario': usuarioSerializado.data
         }, status=status.HTTP_200_OK)
 
+
+        response.set_cookie(
+            key="access",
+            value=access_token,
+            httponly=True,
+            secure=settings.COOKIE_SECURE,
+            samesite=settings.COOKIE_SAMESITE,
+            domain=settings.COOKIE_DOMAIN,
+            max_age=15 * 60
+        )
+
+        response.set_cookie(
+            key="refresh",
+            value=refresh_token,
+            httponly=True,
+            secure=settings.COOKIE_SECURE,
+            samesite=settings.COOKIE_SAMESITE,
+            domain=settings.COOKIE_DOMAIN,
+            max_age=7 * 24 * 60 * 60
+        )
+
+        return response
+
+
+#Funcion que obtiene el usuario
 class UsuarioView(APIView):
     permission_classes = [IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser] 
     
     def get(self, request):
+
         usuario = request.user
         usuarioSerializado = UsuarioSerializer(usuario)
         return Response(usuarioSerializado.data)

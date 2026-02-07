@@ -3,6 +3,14 @@ import os
 from datetime import timedelta
 
 
+
+
+#Variables de entorno
+COOKIE_SECURE = os.getenv("COOKIE_SECURE", "0") == "1"
+COOKIE_SAMESITE = os.getenv("COOKIE_SAMESITE", "Lax")  
+COOKIE_DOMAIN = os.getenv("COOKIE_DOMAIN") or None     
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -14,8 +22,16 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    FRONTEND_ORIGIN,
 ]
+
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    FRONTEND_ORIGIN,
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,13 +53,14 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "usuarios.authentication.CookieJWTAuthentication",
     ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
     ),
 }
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=500),
@@ -122,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
+#Parte de personalizacion
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -137,3 +154,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

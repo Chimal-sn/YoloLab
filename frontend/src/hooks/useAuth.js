@@ -9,28 +9,20 @@ export function useAuth() {
 
     // 1) Función única para cargar usuario desde el token
     const loadUser = useCallback(async () => {
-        const token = localStorage.getItem("token");
-
-        // Si no hay token, no hay sesión
-        if (!token) {
-            setUser(null);
-            setLoadingUser(false);
-            return;
-        }
-
         setLoadingUser(true);
 
         try {
-            const data = await obtenerUsuarioRequest();
+            const data = await obtenerUsuarioRequest(); // backend lee cookies
             setUser(data);
         } catch (err) {
-            // Token inválido/expirado
-            localStorage.removeItem("token");
+
+            // si no hay sesión o expiró
             setUser(null);
         } finally {
             setLoadingUser(false);
         }
     }, []);
+
 
     // 2) Rehidrata sesión al arrancar la app (una sola vez, bien hecho)
     useEffect(() => {
@@ -38,61 +30,46 @@ export function useAuth() {
     }, [loadUser]);
 
     // 3) Login: guarda token y luego carga usuario con ese token
-    const login = useCallback(
-        async (correo, password) => {
-            setLoading(true);
-            setError("");
+    const login = useCallback(async (correo, password) => {
+        setLoading(true);
+        setError("");
 
-            try {
-                const data = await loginRequest(correo, password);
+        try {
+            const data = await loginRequest(correo, password);
 
-                if (data.access) {
-                    localStorage.setItem("token", data.access);
-                    await loadUser(); // <-- CLAVE
-                } else {
-                    throw new Error("No llegó token (access)");
-                }
+            // el backend setea cookies en headers (Set-Cookie)
+            // tú solo recargas el usuario
+            await loadUser();
 
-                return { success: true, data };
-            } catch (err) {
-                setError(err.data?.error || err.message || "Error en el servidor");
-                return { success: false };
-            } finally {
-                setLoading(false);
-            }
-        },
-        [loadUser]
-    );
+            return { success: true, data };
+        } catch (err) {
+            setError(err.data?.error || err.message || "Error en el servidor");
+            return { success: false };
+        } finally {
+            setLoading(false);
+        }
+    }, [loadUser]);
+
 
     // 4) Registrar: igual que login
-    const registrar = useCallback(
-        async (userData) => {
-            setLoading(true);
-            setError("");
+    const registrar = useCallback(async (userData) => {
+        setLoading(true);
+        setError("");
 
-            try {
-                const data = await registrarRequest(userData);
+        try {
+            const data = await registrarRequest(userData);
+            await loadUser();
 
-                if (data.access) {
-                    localStorage.setItem("token", data.access);
-                    await loadUser(); // <-- CLAVE
-                } else {
-                    throw new Error("No llegó token (access)");
-                }
-
-                return { success: true, data };
-            } catch (err) {
-                setError(err.data?.error || err.message || "Error en el servidor");
-                return { success: false };
-            } finally {
-                setLoading(false);
-            }
-        },
-        [loadUser]
-    );
+            return { success: true, data };
+        } catch (err) {
+            setError(err.data?.error || err.message || "Error en el servidor");
+            return { success: false };
+        } finally {
+            setLoading(false);
+        }
+    }, [loadUser]);
 
     const logout = useCallback(() => {
-        localStorage.removeItem("token");
         setUser(null);
         setLoadingUser(false);
     }, []);
